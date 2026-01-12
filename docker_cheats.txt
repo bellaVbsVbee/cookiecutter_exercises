@@ -1,0 +1,14 @@
+docker images
+docker run --rm -it --entrypoint sh train:latest
+
+docker build -f train.dockerfile . -t train:latest
+
+docker run --name experiment2 train:latest
+
+docker run --name experiment4 -v $(pwd)/models:/models/ train:latest
+
+docker build -f evaluate.dockerfile . -t evaluate:latest
+
+docker run --name experiment5 --rm     -v $(pwd)/models/corrupt_mnist_checkpoint.pth:/models/corrupt_mnist_checkpoint.pth     -v $(pwd)/data/processed/corruptmnist_v1/test_images.pt:/data/processed/corruptmnist_v1/test_images.pt     -v $(pwd)/data/processed/corruptmnist_v1/test_target.pt:/data/processed/corruptmnist_v1/test_targets.pt     evaluate:latest     ../../models/corrupt_mnist_checkpoint.pth
+
+docker cp experiment2:models/corrupt_mnist_checkpoint.pth models/
