@@ -7,12 +7,17 @@ import torch
 from torch.utils.data import Dataset
 from torchvision import transforms
 
+root = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../..")
+)
+
 def normalize(images: torch.Tensor) -> torch.Tensor:
     """Normalize images."""
     return (images - images.mean()) / images.std()
 
 def preprocess(data_path: Path, output_folder: Path) -> None:
     print("Preprocessing data...")
+    
     data_path = str(data_path)
     
     train_image_files = glob.glob(f"{data_path}/corruptmnist_v1/train_images_*.pt")
@@ -37,11 +42,21 @@ def preprocess(data_path: Path, output_folder: Path) -> None:
 
 def corrupt_mnist():
     """Return train and test datasets for corrupt MNIST."""
-    
-    train_images = torch.load("~/data/processed/corruptmnist_v1/train_images.pt")
-    train_target = torch.load("~/data/processed/corruptmnist_v1/train_target.pt")
-    test_images = torch.load("~/data/processed/corruptmnist_v1/test_images.pt")
-    test_target = torch.load("~/data/processed/corruptmnist_v1/test_target.pt")
+    base = os.path.join(
+        root,
+        "data",
+        "processed",
+        "corruptmnist_v1",
+    )
+
+    # train_images = torch.load("data/processed/corruptmnist_v1/train_images.pt")
+    # train_target = torch.load("data/processed/corruptmnist_v1/train_target.pt")
+    # test_images = torch.load("data/processed/corruptmnist_v1/test_images.pt")
+    # test_target = torch.load("data/processed/corruptmnist_v1/test_target.pt")
+    train_images = torch.load(os.path.join(base, "train_images.pt"))
+    train_target = torch.load(os.path.join(base, "train_target.pt"))
+    test_images  = torch.load(os.path.join(base, "test_images.pt"))
+    test_target  = torch.load(os.path.join(base, "test_target.pt"))
 
     train_set = torch.utils.data.TensorDataset(train_images, train_target)
     test_set = torch.utils.data.TensorDataset(test_images, test_target)
