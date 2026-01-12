@@ -53,3 +53,8 @@ The directory structure of the project looks like this:
 Created using [mlops_template](https://github.com/SkafteNicki/mlops_template),
 a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting
 started with Machine Learning Operations (MLOps).
+
+
+# How to run
+A script can be run by typing "uv run src/s2m6_ccex/train.py" from the root
+You can also choose to use "uvx invoke train.py"
