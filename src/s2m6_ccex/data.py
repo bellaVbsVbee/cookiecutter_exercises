@@ -49,10 +49,6 @@ def corrupt_mnist():
         "corruptmnist_v1",
     )
 
-    # train_images = torch.load("data/processed/corruptmnist_v1/train_images.pt")
-    # train_target = torch.load("data/processed/corruptmnist_v1/train_target.pt")
-    # test_images = torch.load("data/processed/corruptmnist_v1/test_images.pt")
-    # test_target = torch.load("data/processed/corruptmnist_v1/test_target.pt")
     train_images = torch.load(os.path.join(base, "train_images.pt"))
     train_target = torch.load(os.path.join(base, "train_target.pt"))
     test_images  = torch.load(os.path.join(base, "test_images.pt"))
