@@ -16,7 +16,7 @@ jobs:
         python-version: ["3.10", "3.11", "3.12"]
     steps:
     - name: Check dataset files
-      run: ls -l data/processed/corruptmnist_v1/
+      run: du -h data/processed/corruptmnist_v1/
 
     - name: Checkout
       uses: actions/checkout@v5
